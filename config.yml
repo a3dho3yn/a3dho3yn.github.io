@@ -1,0 +1,34 @@
+baseURL: https://a3dho3yn.ir/
+languageCode: fa-IR
+title: ''
+theme: PaperMod
+defaultContentLanguage: fa
+languages:
+  fa:
+    languageDirection: rtl
+
+
+params:
+  profileMode:
+    enabled: true
+    title: "سید حسین طالقانی"    
+    imageUrl: "me.jpg"
+    imageTitle: "hossein taleghani"
+    imageWidth: 120
+    imageHeight: 120
+    buttons:
+      - name: وبلاگ
+        url: https://virgool.io/@a3dho3yn
+      - name: کتاب انسان‌افزار
+        url: https://peopleware.ir
+  socialIcons:
+    - name: linkedin
+      url: https://www.linkedin.com/in/hossein-taleghani-1985b388
+    - name: github
+      url: https://github.com/a3dho3yn
+    - name: youtube
+      url: https://youtube.com/kodingdojo
+    - name: twitter
+      url: https://twitter.com/a3dho3yn
+  disableThemeToggle: true
+  defaultTheme: auto

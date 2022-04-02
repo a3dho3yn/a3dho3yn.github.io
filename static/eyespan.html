@@ -1,0 +1,144 @@
+<html>
+    <head>
+        <title>Widen Your Eye Span</title>
+        <meta charset="UTF-8">
+        <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v32.102/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+        <style>
+            body {
+                padding: 0;
+                margin: 0;
+            }
+
+            .container {
+                display: flex;
+                flex-flow: column nowrap;
+                align-items: center;
+                justify-content: center;
+                height: 100%;
+            }
+
+            .row {
+                display: flex;
+                flex-flow: row nowrap;
+                align-content: center;
+                justify-content: center;
+            }
+
+            .item {
+                font-family: 'Vazirmatn', 'Roboto Mono', monospace;
+                line-height: 200%;
+                text-align: center;
+            }
+
+            .item-larger {
+                font-size: 3vw;
+                width: 6vw;
+            }
+
+            .item-normal {
+                font-size: 2vw;
+                width: 5vw;
+            }
+            
+            .item-smaller {
+                font-size: 1.5vw;
+                width: 3vw;
+            }
+
+            .item-smallest {
+                font-size: 1vw;
+                width: 2vw;
+            }
+
+            nav {
+                position: fixed;
+                display: flex;
+                flex-flow: column;
+                top: 16px;
+                right: 32px;
+                width: 48px;
+            }
+            
+            button {
+                border: none;
+                background-color: #e8e8e8;
+                padding: 8px 16px;
+                width: 48px;
+                height: 48px;
+                border-radius: 5px;
+                color: #000;
+            }
+            #lang {
+                margin-bottom: 48px;
+            }
+            #larger {
+                font-size: x-large;
+                margin-bottom: 12px;
+            }
+            #smaller {
+                font-size: medium;
+            }
+        </style>
+       
+    </head>
+    <body>
+        <nav>
+            <button onclick="switchLang()" id="lang"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+                <title>
+                  language
+                </title>
+                <path d="M20 18h-1.44a.61.61 0 0 1-.4-.12.81.81 0 0 1-.23-.31L17 15h-5l-1 2.54a.77.77 0 0 1-.22.3.59.59 0 0 1-.4.14H9l4.55-11.47h1.89zm-3.53-4.31L14.89 9.5a11.62 11.62 0 0 1-.39-1.24q-.09.37-.19.69l-.19.56-1.58 4.19zm-6.3-1.58a13.43 13.43 0 0 1-2.91-1.41 11.46 11.46 0 0 0 2.81-5.37H12V4H7.31a4 4 0 0 0-.2-.56C6.87 2.79 6.6 2 6.6 2l-1.47.5s.4.89.6 1.5H0v1.33h2.15A11.23 11.23 0 0 0 5 10.7a17.19 17.19 0 0 1-5 2.1q.56.82.87 1.38a23.28 23.28 0 0 0 5.22-2.51 15.64 15.64 0 0 0 3.56 1.77zM3.63 5.33h4.91a8.11 8.11 0 0 1-2.45 4.45 9.11 9.11 0 0 1-2.46-4.45z"/>
+              </svg></button>
+            <button onclick="incrSize()" id="larger">A</button>
+            <button onclick="decrSize()" id="smaller">A</button>
+        </nav>
+        <div class="container">
+        </div>
+
+        <script>
+            const sizes = ['smallest', 'smaller', 'normal', 'larger'];
+            const faChars = 'اآبپتثجچحخدذرزژسشصضطظعغفقکگلمنوهی'.split('');
+            const enChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+
+            let lang = window.localStorage.getItem('lang') || 'fa';            
+            let size = Number(window.localStorage.getItem('size')) || 2;
+
+            const randomChar = (lang) => (lang == 'fa') ?
+                    faChars[Math.floor(Math.random()*faChars.length)]
+                    : enChars[Math.floor(Math.random()*enChars.length)];
+            const switchLang = () => {
+                lang =lang == 'fa' ? 'en' : 'fa';
+                window.localStorage.setItem('lang', lang);
+                document.querySelectorAll('.item').forEach((el) => el.innerText = randomChar(lang));
+            }
+
+            const incrSize = () => {
+                if (size >= sizes.length - 1) return;
+
+                size += 1;
+                window.localStorage.setItem('size', size);
+                document.querySelectorAll('.item').forEach((el) => el.className = 'item item-' + sizes[size]);
+            }
+
+            const decrSize = () => {
+                if (size <= 0) return;
+                
+                size -= 1;
+                window.localStorage.setItem('size', size);
+                document.querySelectorAll('.item').forEach((el) => el.className = 'item item-' + sizes[size]);
+            }
+
+            for (let width = 3; width < 17; width += 2) {
+                const row = document.createElement('div');
+                row.className = 'row';
+                for (let col = 0; col < width; col++) {
+                    const el = document.createElement('div');
+                    el.innerText = randomChar();
+                    el.className = 'item item-' + sizes[size];
+                    row.appendChild(el);
+                }
+                document.querySelector('.container').appendChild(row);
+            }
+        </script>
+    </body>
+</html>
